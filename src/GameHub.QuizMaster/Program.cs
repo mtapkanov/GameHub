@@ -11,7 +11,11 @@ builder.Services.RegisterSettings(builder.Configuration);
 builder.Services.AddDbContext<AppDbContext>((_, options) => options
     .UseNpgsql(AppConfiguration.ConnectionString), optionsLifetime: ServiceLifetime.Scoped);
 
+builder.Services.AddHealthChecks();
+
 var app = builder.Build();
+app.MapHealthChecks("health");
 
 await app.SeedAppDbContext();
+
 app.Run();

@@ -1,0 +1,28 @@
+name: develop_ci.yml
+on:
+  push:
+    branches:
+      - develop
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release
+      - name: Publish
+        run: dotnet publish --configuration Release --output ./publish
+      - name: Format check
+        run: dotnet format --verify-no-changes --verbosity normal
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: published-app
+          path: ./publish/
