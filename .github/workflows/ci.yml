@@ -30,6 +30,11 @@ jobs:
         if: success()
         run: dotnet publish --configuration Release --output ./publish/quiz-master/
       
+      - name: Print current path before Upload artifact
+        run: |
+          echo "Current directory:"
+          pwd
+      
       - name: Upload artifact
         if: success()
         uses: actions/upload-artifact@v3
