@@ -16,6 +16,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Print current path before Upload artifact
+        run: |
+          echo "Current directory:"
+          pwd
+
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
