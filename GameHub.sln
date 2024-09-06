@@ -4,7 +4,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A4EA770B-6FE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AB483CD2-C5C7-442A-B440-6C11E79B35B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizMaster.Server", "src\QuizMaster.Server\QuizMaster.Server.csproj", "{2CF9B7CB-2B8B-4D13-96F5-CD11C89E4028}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHub.QuizMaster", "src\GameHub.QuizMaster\GameHub.QuizMaster.csproj", "{2CF9B7CB-2B8B-4D13-96F5-CD11C89E4028}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHub.Domain", "src\GameHub.Domain\GameHub.Domain.csproj", "{75F32CEE-6FEE-4031-A8FA-7CFA3D950423}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,11 +15,16 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2CF9B7CB-2B8B-4D13-96F5-CD11C89E4028} = {A4EA770B-6FE1-414E-8EF2-BE3B00B4AA0E}
+		{75F32CEE-6FEE-4031-A8FA-7CFA3D950423} = {A4EA770B-6FE1-414E-8EF2-BE3B00B4AA0E}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{2CF9B7CB-2B8B-4D13-96F5-CD11C89E4028}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2CF9B7CB-2B8B-4D13-96F5-CD11C89E4028}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CF9B7CB-2B8B-4D13-96F5-CD11C89E4028}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CF9B7CB-2B8B-4D13-96F5-CD11C89E4028}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75F32CEE-6FEE-4031-A8FA-7CFA3D950423}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75F32CEE-6FEE-4031-A8FA-7CFA3D950423}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75F32CEE-6FEE-4031-A8FA-7CFA3D950423}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75F32CEE-6FEE-4031-A8FA-7CFA3D950423}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
