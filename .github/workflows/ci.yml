@@ -1,4 +1,4 @@
-name: develop_ci.yml
+name: CI Pipeline
 on:
   push:
     branches:
@@ -13,16 +13,26 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
+      
       - name: Restore
+        if: success()
         run: dotnet restore
-      - name: Build
-        run: dotnet build --configuration Release
-      - name: Publish
-        run: dotnet publish --configuration Release --output ./publish
+      
       - name: Format check
+        if: success()
         run: dotnet format --verify-no-changes --verbosity normal
+      
+      - name: Build
+        if: success()
+        run: dotnet build --configuration Release
+      
+      - name: Publish
+        if: success()
+        run: dotnet publish --configuration Release --output ./publish/quiz-master/
+      
       - name: Upload artifact
+        if: success()
         uses: actions/upload-artifact@v3
         with:
-          name: published-app
-          path: ./publish/
+          name: published-quiz-master
+          path: ./publish/quiz-master/
