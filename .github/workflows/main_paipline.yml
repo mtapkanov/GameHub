@@ -109,8 +109,8 @@ jobs:
           key: ${{ env.SSH_PRIVATE_KEY }}
           passphrase: ${{ env.SSH_PASSPHRASE }}
           source: "./docker/docker-compose.yml"
-          target: "~/docker-compose.yml"
-          
+          target: "~/docker/"
+
       - name: Deploy to remote server
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -123,4 +123,4 @@ jobs:
             export POSTGRES_PASSWORD=${{ env.POSTGRES_PASSWORD }}
             export POSTGRES_DB=${{ env.POSTGRES_DB }}
             export DOCKER_HUB_USERNAME=${{ env.DOCKER_HUB_USERNAME }}
-            docker-compose -f ~/docker-compose.yml up -d
+            docker-compose -f ~/docker/docker-compose.yml up -d
