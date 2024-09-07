@@ -35,6 +35,15 @@ jobs:
       
       - name: Publish
         run: dotnet publish --configuration Release --output ./publish/quiz-master/
+
+      - name: Check if the publish directory exists
+        run: |
+          if [ -d "./publish/quiz-master/" ]; then
+            echo "Directory exists. Listing files:"
+            ls ./publish/quiz-master/
+          else
+            echo "Directory does not exist."
+          fi
       
       - name: Upload artifact
         uses: actions/upload-artifact@v3
