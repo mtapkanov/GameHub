@@ -55,7 +55,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: docker
-          path: ./
+          path: ./docker/
         
       - name: Display structure of downloaded files
         run: ls -R
@@ -65,9 +65,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
-      - name: Print working directory
-        run: pwd
 
       - name: List files in working directory
         run: ls -l
