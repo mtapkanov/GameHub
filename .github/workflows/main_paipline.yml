@@ -95,6 +95,12 @@ jobs:
       DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
 
     steps:
+      - name: Download docker artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: docker
+          path: ./docker/
+          
       - name: Deploy to remote server
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -107,4 +113,4 @@ jobs:
             export POSTGRES_PASSWORD=${{ env.POSTGRES_PASSWORD }}
             export POSTGRES_DB=${{ env.POSTGRES_DB }}
             export DOCKER_HUB_USERNAME=${{ env.DOCKER_HUB_USERNAME }}
-            docker-compose up -d
+            docker-compose up ./docker/docker-compose.yml -d
