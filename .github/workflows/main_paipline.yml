@@ -101,14 +101,15 @@ jobs:
           name: docker
           path: ./docker/
 
-      - name: Working directory
-        run: pwd
-      
-      - name: List files in working directory
-        run: ls -l
-        
-      - name: List files in docker directory
-        run: ls -l docker
+      - name: Copy docker-compose files to remote server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ env.REMOTE_HOST }}
+          username: ${{ env.REMOTE_USER }}
+          key: ${{ env.SSH_PRIVATE_KEY }}
+          passphrase: ${{ env.SSH_PASSPHRASE }}
+          source: "./docker/docker-compose.yml"
+          target: "~/docker-compose.yml"
           
       - name: Deploy to remote server
         uses: appleboy/ssh-action@v1.0.3
@@ -122,4 +123,4 @@ jobs:
             export POSTGRES_PASSWORD=${{ env.POSTGRES_PASSWORD }}
             export POSTGRES_DB=${{ env.POSTGRES_DB }}
             export DOCKER_HUB_USERNAME=${{ env.DOCKER_HUB_USERNAME }}
-            docker-compose -f docker/docker-compose.yml up -d
+            docker-compose -f ~/docker-compose.yml up -d
