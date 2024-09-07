@@ -1,13 +1,9 @@
 name: CI Pipeline
 
-env:
-  ACTIONS_STEP_DEBUG: true
-
 on:
   push:
     branches:
       - develop
-      - main
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,16 +13,6 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
-
-      - name: Print current path before start script
-        run: |
-          echo "Full path to publish directory:"
-          pwd
-          
-      - name: Print files in the current directory
-        run: |
-          echo "Files in the current directory:"
-          ls
           
       - name: Restore
         run: dotnet restore
@@ -36,21 +22,6 @@ jobs:
       
       - name: Build
         run: dotnet build src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release
-
-      - name: Publish
-        run: dotnet publish src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release --output publish/quiz-master/
-
-      - name: Check if the publish directory exists
-        run: |
-          if [ -d "./publish/quiz-master/" ]; then
-            echo "Directory exists. Listing files:"
-            ls ./publish/quiz-master/
-          else
-            echo "Directory does not exist."
-          fi
       
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          path: publish/quiz-master/**
-          overwrite: true
+      - name: Run Test
+        run: dotnet test tests/GameHub.QuizMaster.Tests/GameHub.QuizMaster.Tests.csproj

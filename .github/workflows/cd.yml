@@ -2,39 +2,33 @@ name: CD Pipeline
 
 env:
   ACTIONS_STEP_DEBUG: true
-  
+
 on:
-  workflow_run:
-    workflows: ["CI Pipeline"]
-    types:
-      - completed
+  push:
     branches:
       - main
-
 jobs:
-  docker:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Print current path before start script
-        run: |
-          echo "Full path to publish directory:"
-          pwd
-
-      - name: Print files in the current directory
-        run: |
-          echo "Files in the current directory:"
-          ls
-
-      - name: Download artifact
-        uses: actions/download-artifact@v4
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
         with:
-          path: publish/quiz-master/
-          merge-multiple: true
+          dotnet-version: 8.0.x
 
+      - name: Restore
+        run: dotnet restore
+
+      - name: Format check
+        run: dotnet format --verify-no-changes --verbosity normal
+
+      - name: Build
+        run: dotnet build src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release
+
+      - name: Publish
+        run: dotnet publish src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release --output publish/quiz-master/
+        
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
