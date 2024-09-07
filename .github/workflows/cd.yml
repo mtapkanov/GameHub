@@ -41,9 +41,9 @@ jobs:
 
       - name: Print current directory and app name
         run: |
-          echo "current directory"
-          echo "${pwd}/docker/Dockerfile"
-          echo "app name"
+          echo "Current directory:"
+          echo "$(pwd)/docker/Dockerfile"
+          echo "App name:"
           echo "${{ secrets.DOCKER_HUB_USERNAME }}/quiz-master:latest"
           
       - name: Build and Push Docker image
