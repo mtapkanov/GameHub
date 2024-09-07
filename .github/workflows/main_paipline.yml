@@ -102,7 +102,7 @@ jobs:
           path: ./docker/
 
       - name: List files in docker directory
-        run: ls -l dockers
+        run: ls -l docker
           
       - name: Deploy to remote server
         uses: appleboy/ssh-action@v1.0.3
