@@ -27,7 +27,7 @@ jobs:
         run: dotnet build src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release
 
       - name: Publish
-        run: dotnet publish src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release --self-contained true --output publish/quiz-master/
+        run: dotnet publish src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release --self-contained true --output ./publish/quiz-master/
         
   docker:
     runs-on: ubuntu-latest
