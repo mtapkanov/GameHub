@@ -91,6 +91,7 @@ jobs:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
             docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/quiz-master:latest
             docker stop quiz-master || true
