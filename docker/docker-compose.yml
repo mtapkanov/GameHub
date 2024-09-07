@@ -1,0 +1,30 @@
+services:
+
+  db:
+    image: postgres:latest
+    hostname: "game_hub_postgres_db"
+    container_name: "game_hub_postgres_db"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    networks:
+      - common_network
+    ports:
+      - "5432:5432"
+    
+  quiz_master_app:
+    image: ${DOCKER_HUB_USERNAME}/quiz-master:latest
+    hostname: "quiz_master_app"
+    container_name: "quiz_master_app"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      CONNECTION_STRINGS__POSTGRES: Host=db;Port=5432;Database=${POSTGRES_DB};User ID=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+    depends_on:
+      - db
+    networks:
+      - common_network
+  
+networks:
+  common_network:
+    driver: bridge

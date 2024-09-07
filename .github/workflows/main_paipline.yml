@@ -84,16 +84,27 @@ jobs:
     runs-on: ubuntu-latest
     needs: docker
 
+    env:
+      REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+      REMOTE_USER: ${{ secrets.REMOTE_USER }}
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      SSH_PASSPHRASE: ${{ secrets.SSH_PASSPHRASE }}
+      POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+      DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+
     steps:
       - name: Deploy to remote server
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          host: ${{ env.REMOTE_HOST }}
+          username: ${{ env.REMOTE_USER }}
+          key: ${{ env.SSH_PRIVATE_KEY }}
+          passphrase: ${{ env.SSH_PASSPHRASE }}
           script: |
-            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/quiz-master:latest
-            docker stop quiz-master || true
-            docker rm quiz-master || true
-            docker run -d --name quiz-master -p 8080:8080 -p 8443:8443 ${{ secrets.DOCKER_HUB_USERNAME }}/quiz-master:latest
+            export POSTGRES_USER=${{ env.POSTGRES_USER }}
+            export POSTGRES_PASSWORD=${{ env.POSTGRES_PASSWORD }}
+            export POSTGRES_DB=${{ env.POSTGRES_DB }}
+            export DOCKER_HUB_USERNAME=${{ env.DOCKER_HUB_USERNAME }}
+            docker-compose up -d
