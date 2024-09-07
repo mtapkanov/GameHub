@@ -101,6 +101,12 @@ jobs:
           name: docker
           path: ./docker/
 
+      - name: Working directory
+        run: pwd
+      
+      - name: List files in working directory
+        run: ls -l
+        
       - name: List files in docker directory
         run: ls -l docker
           
@@ -116,4 +122,4 @@ jobs:
             export POSTGRES_PASSWORD=${{ env.POSTGRES_PASSWORD }}
             export POSTGRES_DB=${{ env.POSTGRES_DB }}
             export DOCKER_HUB_USERNAME=${{ env.DOCKER_HUB_USERNAME }}
-            docker-compose -f /docker/docker-compose.yml up -d
+            docker-compose -f docker/docker-compose.yml up -d
