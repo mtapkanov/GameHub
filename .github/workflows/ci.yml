@@ -35,10 +35,10 @@ jobs:
         run: dotnet format --verify-no-changes --verbosity normal
       
       - name: Build
-        run: dotnet build --configuration Release
-      
+        run: dotnet build src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release
+
       - name: Publish
-        run: dotnet publish --configuration Release --output ./publish/quiz-master/
+        run: dotnet publish src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release --output publish/quiz-master/
 
       - name: Check if the publish directory exists
         run: |
@@ -53,5 +53,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: published-quiz-master
-          path: ./publish/quiz-master/
+          path: publish/quiz-master/**
           overwrite: true

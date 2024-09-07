@@ -33,7 +33,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: published-quiz-master
-          path: ./publish/quiz-master/
+          path: publish/quiz-master/
           merge-multiple: true
 
       - name: Login to Docker Hub
