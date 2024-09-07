@@ -111,6 +111,12 @@ jobs:
           source: "./docker/docker-compose.yml"
           target: "~/docker/"
 
+      - name: List files in working directory
+        run: ls ~/ -l
+
+      - name: List files in docker directory
+        run: ls ~/docker -l docker
+
       - name: Deploy to remote server
         uses: appleboy/ssh-action@v1.0.3
         with:
