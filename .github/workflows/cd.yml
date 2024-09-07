@@ -39,6 +39,11 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+      - name: Print current dirictory
+        run: |
+          echo "current directory"
+          pwd
+          
       - name: Build and Push Docker image
         run: |
           docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/quiz-master:latest -f ./docker/Dockerfile .
