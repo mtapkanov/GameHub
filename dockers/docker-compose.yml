@@ -1,6 +1,0 @@
-﻿services:
-  quiz master.server:
-    image: quiz_master.server
-    build:
-      context: .
-      dockerfile: src/QuizMaster.Server/Dockerfile

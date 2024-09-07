@@ -13,7 +13,17 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
-      
+
+      - name: Print current path before start script
+        run: |
+          echo "Full path to publish directory:"
+          pwd
+          
+      - name: Print files in the current directory
+        run: |
+          echo "Files in the current directory:"
+          ls
+          
       - name: Restore
         run: dotnet restore
       
@@ -25,10 +35,6 @@ jobs:
       
       - name: Publish
         run: dotnet publish --configuration Release --output ./publish/quiz-master/
-
-      - name: Print current path before Upload artifact
-        run: |
-          echo "Full path to publish directory: $(pwd)/publish/quiz-master"
       
       - name: Upload artifact
         uses: actions/upload-artifact@v3

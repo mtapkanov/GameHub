@@ -52,4 +52,4 @@ jobs:
             docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/quiz-master:latest
             docker stop quiz-master || true
             docker rm quiz-master || true
-            docker run -d --name quiz-master -p 80:80 -p 443:443 ${{ secrets.DOCKER_HUB_USERNAME }}/quiz-master:latest
+            docker run -d --name quiz-master -p 8080:8080 -p 8443:8443 ${{ secrets.DOCKER_HUB_USERNAME }}/quiz-master:latest
