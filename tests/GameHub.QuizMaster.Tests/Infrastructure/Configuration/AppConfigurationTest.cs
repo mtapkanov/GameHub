@@ -8,6 +8,6 @@ public class AppConfigurationTest
     [Fact]
     public void METHOD()
     {
-        
+
     }
 }
