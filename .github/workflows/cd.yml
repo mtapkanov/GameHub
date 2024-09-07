@@ -39,10 +39,12 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Print current dirictory
+      - name: Print current directory and app name
         run: |
           echo "current directory"
-          pwd
+          echo "${pwd}/docker/Dockerfile"
+          echo "app name"
+          echo "${{ secrets.DOCKER_HUB_USERNAME }}/quiz-master:latest"
           
       - name: Build and Push Docker image
         run: |
