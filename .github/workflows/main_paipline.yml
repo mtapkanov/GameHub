@@ -101,6 +101,16 @@ jobs:
           name: docker
           path: ./docker/
 
+      - name: Create directory on remote server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ env.REMOTE_HOST }}
+          username: ${{ env.REMOTE_USER }}
+          key: ${{ env.SSH_PRIVATE_KEY }}
+          passphrase: ${{ env.SSH_PASSPHRASE }}
+          script: |
+            mkdir -p ~/docker
+
       - name: Copy docker-compose files to remote server
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -110,12 +120,6 @@ jobs:
           passphrase: ${{ env.SSH_PASSPHRASE }}
           source: "./docker/docker-compose.yml"
           target: "~/docker/"
-
-      - name: List files in working directory
-        run: ls ~/ -l
-
-      - name: List files in docker directory
-        run: ls ~/docker -l docker
 
       - name: Deploy to remote server
         uses: appleboy/ssh-action@v1.0.3
