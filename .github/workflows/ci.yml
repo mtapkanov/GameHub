@@ -15,29 +15,23 @@ jobs:
           dotnet-version: 8.0.x
       
       - name: Restore
-        if: success()
         run: dotnet restore
       
       - name: Format check
-        if: success()
         run: dotnet format --verify-no-changes --verbosity normal
       
       - name: Build
-        if: success()
         run: dotnet build --configuration Release
       
       - name: Publish
-        if: success()
         run: dotnet publish --configuration Release --output ./publish/quiz-master/
-      
+
       - name: Print current path before Upload artifact
         run: |
-          echo "Current directory:"
-          pwd
+          echo "Full path to publish directory: $(pwd)/publish/quiz-master"
       
       - name: Upload artifact
-        if: success()
         uses: actions/upload-artifact@v3
         with:
           name: published-quiz-master
-          path: ./publish/quiz-master/
+          path: "$(pwd)/publish/quiz-master/"
