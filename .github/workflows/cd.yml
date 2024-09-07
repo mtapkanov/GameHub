@@ -49,7 +49,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: quiz-master
-          path: ./publish/
+          path: ./publish/quiz-master/
 
       - name: Download docker artifacts
         uses: actions/download-artifact@v4
@@ -71,6 +71,9 @@ jobs:
 
       - name: List files in docker directory
         run: ls -l docker
+
+      - name: List files in publish/quiz-master directory
+        run: ls -l publish/quiz-master/
           
       - name: Build Docker image
         run: |
