@@ -24,6 +24,8 @@ services:
       - db
     networks:
       - common_network
+    volumes:
+      - ./logs:/app/logs
   
 networks:
   common_network:
