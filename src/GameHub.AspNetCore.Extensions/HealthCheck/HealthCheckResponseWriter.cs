@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using GameHub.Extensions.HealthCheck.Internal;
+using GameHub.AspNetCore.Extensions.HealthCheck.Internal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace GameHub.Extensions.HealthCheck;
+namespace GameHub.AspNetCore.Extensions.HealthCheck;
 
 /// <summary>
 ///     HealthCheck conventional response writer.

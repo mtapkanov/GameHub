@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace GameHub.Extensions.HealthCheck.Internal;
+namespace GameHub.AspNetCore.Extensions.HealthCheck.Internal;
 
 internal record ServiceHealthInfo(
     string Name,

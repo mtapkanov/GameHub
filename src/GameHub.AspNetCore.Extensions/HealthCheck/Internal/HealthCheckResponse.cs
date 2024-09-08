@@ -1,4 +1,4 @@
-﻿namespace GameHub.Extensions.HealthCheck.Internal;
+﻿namespace GameHub.AspNetCore.Extensions.HealthCheck.Internal;
 
 internal record HealthCheckResponse
 {

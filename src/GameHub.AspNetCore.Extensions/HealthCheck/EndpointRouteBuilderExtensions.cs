@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace GameHub.Extensions.HealthCheck;
+namespace GameHub.AspNetCore.Extensions.HealthCheck;
 
 /// <summary>
 ///     Provides extension methods for Microsoft.AspNetCore.Routing.IEndpointRouteBuilder

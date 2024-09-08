@@ -1,4 +1,4 @@
-﻿using GameHub.Extensions.HealthCheck;
+﻿using GameHub.AspNetCore.Extensions.HealthCheck;
 using GameHub.QuizMaster.Infrastructure.Configuration;
 using GameHub.QuizMaster.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;

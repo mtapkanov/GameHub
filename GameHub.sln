@@ -10,7 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHub.Domain", "src\GameH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHub.QuizMaster.Tests", "tests\GameHub.QuizMaster.Tests\GameHub.QuizMaster.Tests.csproj", "{808D84D9-1185-4050-AEF8-F8835B80CF30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHub.Extensions", "src\GameHub.Extensions\GameHub.Extensions.csproj", "{5C812FC1-050E-4C0A-B213-4E66D1992010}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHub.AspNetCore.Extensions", "src\GameHub.AspNetCore.Extensions\GameHub.AspNetCore.Extensions.csproj", "{5C812FC1-050E-4C0A-B213-4E66D1992010}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
