@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHub.Domain", "src\GameH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHub.QuizMaster.Tests", "tests\GameHub.QuizMaster.Tests\GameHub.QuizMaster.Tests.csproj", "{808D84D9-1185-4050-AEF8-F8835B80CF30}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHub.Extensions", "src\GameHub.Extensions\GameHub.Extensions.csproj", "{5C812FC1-050E-4C0A-B213-4E66D1992010}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,7 @@ Global
 		{2CF9B7CB-2B8B-4D13-96F5-CD11C89E4028} = {A4EA770B-6FE1-414E-8EF2-BE3B00B4AA0E}
 		{75F32CEE-6FEE-4031-A8FA-7CFA3D950423} = {A4EA770B-6FE1-414E-8EF2-BE3B00B4AA0E}
 		{808D84D9-1185-4050-AEF8-F8835B80CF30} = {AB483CD2-C5C7-442A-B440-6C11E79B35B1}
+		{5C812FC1-050E-4C0A-B213-4E66D1992010} = {A4EA770B-6FE1-414E-8EF2-BE3B00B4AA0E}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{2CF9B7CB-2B8B-4D13-96F5-CD11C89E4028}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -33,5 +36,9 @@ Global
 		{808D84D9-1185-4050-AEF8-F8835B80CF30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{808D84D9-1185-4050-AEF8-F8835B80CF30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{808D84D9-1185-4050-AEF8-F8835B80CF30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C812FC1-050E-4C0A-B213-4E66D1992010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C812FC1-050E-4C0A-B213-4E66D1992010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C812FC1-050E-4C0A-B213-4E66D1992010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C812FC1-050E-4C0A-B213-4E66D1992010}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

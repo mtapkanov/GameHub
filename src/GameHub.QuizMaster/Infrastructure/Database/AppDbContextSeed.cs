@@ -11,9 +11,6 @@ public static class AppDbContextSeed
         var logger = scope.ServiceProvider.GetRequiredService<ILogger<AppDbContext>>();
         try
         {
-            var connectionString = dbContext.Database.GetDbConnection().ConnectionString;
-            logger.LogInformation($"Try migrate to db. Connection string: {connectionString}");
-
             await dbContext.Database.MigrateAsync();
         }
         catch (Exception exception)

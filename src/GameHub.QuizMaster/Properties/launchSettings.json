@@ -4,7 +4,7 @@
     "GameHub.QuizMaster": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": false,
+      "launchBrowser": true,
       "launchUrl": "health",
       "applicationUrl": "https://localhost:8433;http://localhost:8080",
       "environmentVariables": {

@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="8.0.2" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -30,6 +31,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\GameHub.Domain\GameHub.Domain.csproj" />
+      <ProjectReference Include="..\GameHub.Extensions\GameHub.Extensions.csproj" />
     </ItemGroup>
 
 </Project>
