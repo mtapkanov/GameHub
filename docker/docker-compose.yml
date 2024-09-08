@@ -18,8 +18,8 @@ services:
     hostname: "quiz_master_app"
     container_name: "quiz_master_app"
     environment:
-      ASPNETCORE_ENVIRONMENT: Production
-      CONNECTION_STRINGS__POSTGRES: Host=db;Port=5432;Database=${POSTGRES_DB};User ID=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+      - ASPNETCORE_ENVIRONMENT=Production
+      - CONNECTIONSTRINGS__POSTGRES=Host=db;Port=5432;Database=${POSTGRES_DB};User ID=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
     depends_on:
       - db
     networks:
