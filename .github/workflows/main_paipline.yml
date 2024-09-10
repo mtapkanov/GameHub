@@ -29,6 +29,7 @@ jobs:
         id: gitversion
         run: |
           echo $(dotnet-gitversion /output json /format {SemVer}) > version.txt
+          cat version.txt
 
       - name: Set Git Tag
         run: |
