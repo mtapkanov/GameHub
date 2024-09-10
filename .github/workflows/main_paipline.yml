@@ -36,6 +36,11 @@ jobs:
       - name: Display contents of version file
         run: echo $(cat version.txt)
 
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
       - name: Set Git Tag
         run: |
           VERSION=$(cat version.txt | xargs)
