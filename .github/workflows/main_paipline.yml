@@ -2,7 +2,7 @@ name: CI|CD Pipeline
 
 env:
   ACTIONS_STEP_DEBUG: true
-  GITHUB_ENV: ''
+  Version: ''
 
 on:
   push:
@@ -25,26 +25,17 @@ jobs:
         run: dotnet format --verify-no-changes --verbosity normal
 
       - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v0.9.11
-        with:
-          versionSpec: '6.x'
-          
-      - name: Install jq
-        run: sudo apt-get install -y jq
+        run: dotnet tool install --global GitVersion.Tool
         
       - name: Calculate GitVersion
         id: gitversion
         run: |
-          dotnet-gitversion /output json > gitversion.json
-          VERSION=$(cat gitversion.json | jq -r .SemVer)
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo dotnet-gitversion /output json /format {SemVer} >> $Version
 
       - name: Set Git Tag
-        env:
-          GIT_TAG: v${{ env.VERSION }}
         run: |
-          git tag $GIT_TAG
-          git push origin $GIT_TAG
+          git tag $Version
+          git push origin $Version
 
       - name: Build
         run: dotnet build src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release
