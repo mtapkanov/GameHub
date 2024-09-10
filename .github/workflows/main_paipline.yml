@@ -29,11 +29,11 @@ jobs:
           versionSpec: '6.x'
       - name: Calculate GitVersion
         id: gitversion
-        run: gitversion /output json /showvariable SemVer
+        run: echo "VERSION=$(dotnet-gitversion /output json /showvariable SemVer)" >> $GITHUB_ENV
 
       - name: Set Git Tag
         env:
-          GIT_TAG: v$(gitversion /output json /showvariable SemVer)
+          GIT_TAG: v${{ env.VERSION }}
         run: |
           git tag $GIT_TAG
           git push origin $GIT_TAG
