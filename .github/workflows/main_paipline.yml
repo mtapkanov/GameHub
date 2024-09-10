@@ -2,6 +2,7 @@ name: CI|CD Pipeline
 
 env:
   ACTIONS_STEP_DEBUG: true
+  GITHUB_ENV: ''
 
 on:
   push:
@@ -27,9 +28,16 @@ jobs:
         uses: gittools/actions/gitversion/setup@v0.9.11
         with:
           versionSpec: '6.x'
+          
+      - name: Install jq
+        run: sudo apt-get install -y jq
+        
       - name: Calculate GitVersion
         id: gitversion
-        run: echo "VERSION=$(dotnet-gitversion /output json /showvariable SemVer)" >> $GITHUB_ENV
+        run: |
+          dotnet-gitversion /output json > gitversion.json
+          VERSION=$(cat gitversion.json | jq -r .SemVer)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Set Git Tag
         env:
