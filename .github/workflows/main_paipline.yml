@@ -26,8 +26,8 @@ jobs:
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v3.0.0
         with:
-          versionSpec: '6.0.0'
-          
+          versionSpec: '6.x'
+        
       - name: Calculate GitVersion
         id: version
         run: echo "version=$(gitversion /output json /showvariable SemVer)" >> version.txt
