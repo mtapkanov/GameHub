@@ -2,8 +2,6 @@ name: CI|CD Pipeline
 
 env:
   ACTIONS_STEP_DEBUG: true
-  Version: ''
-
 on:
   push:
     branches:
@@ -34,8 +32,9 @@ jobs:
 
       - name: Set Git Tag
         run: |
-          git tag $(cat version.txt)
-          git push origin $(cat version.txt)
+          VERSION=$(cat version.txt | xargs)
+          git tag "$VERSION"
+          git push origin "$VERSION"
 
       - name: Build
         run: dotnet build src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release
