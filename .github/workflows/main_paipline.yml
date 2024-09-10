@@ -30,7 +30,7 @@ jobs:
       - name: Calculate GitVersion
         id: gitversion
         run: |
-          dotnet-gitversion /output json /format {SemVer} > version.txt
+          echo $(dotnet-gitversion /output json /format {SemVer}) > version.txt
 
       - name: Set Git Tag
         run: |
