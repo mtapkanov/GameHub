@@ -24,20 +24,20 @@ jobs:
         run: dotnet format --verify-no-changes --verbosity normal
 
       - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v3.0.0
+        uses: gittools/actions/gitversion/setup@v0.9.11
         with:
           versionSpec: '6.x'
-        
       - name: Calculate GitVersion
-        id: version
-        run: echo "version=$(gitversion /output json /showvariable SemVer)" >> version.txt
+        id: gitversion
+        run: gitversion /output json /showvariable SemVer
 
-      - name: Display structure of downloaded files
-        run: ls -R
-      
-      - name: Display text from version file
-        run: cat version.txt
-    
+      - name: Set Git Tag
+        env:
+          GIT_TAG: v$(gitversion /output json /showvariable SemVer)
+        run: |
+          git tag $GIT_TAG
+          git push origin $GIT_TAG
+
       - name: Build
         run: dotnet build src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release
 
