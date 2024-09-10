@@ -23,6 +23,21 @@ jobs:
       - name: Format check
         run: dotnet format --verify-no-changes --verbosity normal
 
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v3.0.0
+        with:
+          versionSpec: '6.0.0'
+          
+      - name: Calculate GitVersion
+        id: version
+        run: echo "version=$(gitversion /output json /showvariable SemVer)" >> version.txt
+
+      - name: Display structure of downloaded files
+        run: ls -R
+      
+      - name: Display text from version file
+        run: cat version.txt
+    
       - name: Build
         run: dotnet build src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release
 
