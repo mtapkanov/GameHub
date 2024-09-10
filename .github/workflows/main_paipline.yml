@@ -29,12 +29,13 @@ jobs:
         id: gitversion
         run: |
           echo $(dotnet-gitversion /output json /format {SemVer}) > version.txt
-          cat version.txt
+          
+      - name: Display contents of version file
+        run: echo $(cat version.txt)
 
       - name: Set Git Tag
         run: |
           VERSION=$(cat version.txt | xargs)
-          echo "Tagging with version: $VERSION"
           git tag "$VERSION"
           git push origin "$VERSION"
 
