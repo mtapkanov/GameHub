@@ -35,11 +35,22 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
 
-      - name: Set up GitVersion
+      - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v3.0.0
         with:
           versionSpec: '6.x'
-        
+          
+      - name: Determine Version
+        uses: gittools/actions/gitversion/execute@v3.0.0
+        with:
+          useConfigFile: true
+          configFilePath: VersionConfig.yml
+
+      - name: Output the formatted version
+        uses: gittools/actions/gitversion/command@v3.0.0
+        with:
+          arguments: '/format {Major}.{Minor}.{Patch}'
+      
       - name: Calculate GitVersion and Set Git Tag
         run: |
           echo "VERSION=$(dotnet-gitversion /output json /format {Major}.{Minor}.{Patch})" >> $GITHUB_ENV
