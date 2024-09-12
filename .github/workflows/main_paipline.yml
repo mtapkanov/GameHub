@@ -43,13 +43,14 @@ jobs:
       - name: Calculate GitVersion and Set Git Tag
         run: |
           echo "VERSION=$(dotnet-gitversion /output json /format {Major}.{Minor}.{Patch})" >> $GITHUB_ENV
+          echo "Tagging with version: $VERSION"
           git tag "$VERSION"
           git push origin "$VERSION"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish
-        run: dotnet publish src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release -p -p:Version=$VERSION -r linux-x64 --self-contained true --output ./publish/quiz-master/
+        run: dotnet publish src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release -p -p:Version="$VERSION" -r linux-x64 --self-contained true --output ./publish/quiz-master/
 
       - name: Upload project artifact
         uses: actions/upload-artifact@v4
