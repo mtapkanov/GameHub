@@ -24,31 +24,25 @@ jobs:
       - name: Restore
         run: dotnet restore
 
+      - name: Build
+        run: dotnet build src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release
+
       - name: Format check
         run: dotnet format --verify-no-changes --verbosity normal
-
-      - name: Install GitVersion
-        run: dotnet tool install --global GitVersion.Tool
         
-      - name: Calculate GitVersion
-        id: gitversion
-        run: |
-          echo "VERSION=$(dotnet-gitversion /output json /format {Major}.{Minor}.{Patch})" >> $GITHUB_ENV
-
       - name: Configure Git
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-
-      - name: Set Git Tag
+        
+      - name: Calculate GitVersion and Set Git Tag
         run: |
+          dotnet tool install --global GitVersion.Tool
+          echo "VERSION=$(dotnet-gitversion /output json /format {Major}.{Minor}.{Patch})" >> $GITHUB_ENV
           git tag "$VERSION"
           git push origin "$VERSION"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build
-        run: dotnet build src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release
 
       - name: Publish
         run: dotnet publish src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release -p -p:Version=$VERSION -r linux-x64 --self-contained true --output ./publish/quiz-master/
@@ -89,8 +83,8 @@ jobs:
           
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/quiz-master:$VERSION -f docker/Dockerfile .
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/quiz-master:$VERSION
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/quiz-master:"$VERSION" -f docker/Dockerfile .
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/quiz-master:"$VERSION"
 
   deploy:
     runs-on: ubuntu-latest
@@ -135,5 +129,5 @@ jobs:
             export POSTGRES_PASSWORD=${{ env.POSTGRES_PASSWORD }}
             export POSTGRES_DB=${{ env.POSTGRES_DB }}
             export DOCKER_HUB_USERNAME=${{ env.DOCKER_HUB_USERNAME }}
-            export VERSION=$VERSION
+            export VERSION="$VERSION"
             docker compose -f ~/docker/docker-compose.yml up --build -d
