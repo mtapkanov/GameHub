@@ -33,10 +33,7 @@ jobs:
       - name: Calculate GitVersion
         id: gitversion
         run: |
-          echo $(dotnet-gitversion /output json /format {SemVer}) > version.txt
-          
-      - name: Display contents of version file
-        run: echo $(cat version.txt)
+          echo "VERSION=$(dotnet-gitversion /output json /format {SemVer})" >> $GITHUB_ENV
 
       - name: Configure Git
         run: |
@@ -45,7 +42,6 @@ jobs:
 
       - name: Set Git Tag
         run: |
-          VERSION=$(cat version.txt | xargs)
           git tag "$VERSION"
           git push origin "$VERSION"
         env:
@@ -55,7 +51,7 @@ jobs:
         run: dotnet build src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release
 
       - name: Publish
-        run: dotnet publish src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release -r linux-x64 --self-contained true --output ./publish/quiz-master/
+        run: dotnet publish src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release -p -p:Version=$VERSION -r linux-x64 --self-contained true --output ./publish/quiz-master/
 
       - name: Upload project artifact
         uses: actions/upload-artifact@v4
