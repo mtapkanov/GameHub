@@ -81,28 +81,16 @@ jobs:
           name: docker
           path: ./docker/
         
-      - name: Display structure of downloaded files
-        run: ls -R
-        
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
-      - name: List files in working directory
-        run: ls -l
-
-      - name: List files in docker directory
-        run: ls -l docker
-
-      - name: List files in publish/quiz-master directory
-        run: ls -l publish/quiz-master/
           
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/quiz-master:latest -f docker/Dockerfile .
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/quiz-master:latest
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/quiz-master:$VERSION -f docker/Dockerfile .
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/quiz-master:$VERSION
 
   deploy:
     runs-on: ubuntu-latest
@@ -147,4 +135,5 @@ jobs:
             export POSTGRES_PASSWORD=${{ env.POSTGRES_PASSWORD }}
             export POSTGRES_DB=${{ env.POSTGRES_DB }}
             export DOCKER_HUB_USERNAME=${{ env.DOCKER_HUB_USERNAME }}
+            export VERSION=$VERSION
             docker compose -f ~/docker/docker-compose.yml up --build -d

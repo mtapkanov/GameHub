@@ -14,7 +14,7 @@ services:
       - "5432:5432"
     
   quiz_master_app:
-    image: ${DOCKER_HUB_USERNAME}/quiz-master:latest
+    image: ${DOCKER_HUB_USERNAME}/quiz-master:${VERSION}
     hostname: "quiz_master_app"
     container_name: "quiz_master_app"
     environment:
