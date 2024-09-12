@@ -33,7 +33,7 @@ jobs:
       - name: Calculate GitVersion
         id: gitversion
         run: |
-          echo "VERSION=$(dotnet-gitversion /output json /format {SemVer})" >> $GITHUB_ENV
+          echo "VERSION=$(dotnet-gitversion /output json /format {Major}.{Minor}.{Patch})" >> $GITHUB_ENV
 
       - name: Configure Git
         run: |
