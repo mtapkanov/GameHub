@@ -46,6 +46,8 @@ jobs:
           VERSION=$(cat version.txt | xargs)
           git tag "$VERSION"
           git push origin "$VERSION"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build
         run: dotnet build src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release
