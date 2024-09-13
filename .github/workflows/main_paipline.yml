@@ -24,6 +24,11 @@ jobs:
 
       - name: Determine Version
         uses: gittools/actions/gitversion/execute@v3.0.0
+        
+      - name: Output the formatted version
+        uses: gittools/actions/gitversion/command@v3.0.0
+        with:
+          arguments: '/format {MajorMinorPatch}' # any Output Variable can be used here
           
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
