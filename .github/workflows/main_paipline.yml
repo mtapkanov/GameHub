@@ -27,11 +27,11 @@ jobs:
         
       - name: Output the formatted version
         uses: gittools/actions/gitversion/command@v3.0.0
-        with:
-          arguments: '/format {MajorMinorPatch}'
         
       - name: Set Version to Env
-        run: echo "VERSION=${{ env.GitVersion_MajorMinorPatch }}" >> $GITHUB_ENV
+        run: |
+          echo "VERSION=${{ env.GitVersion_MajorMinorPatch }}" >> $GITHUB_ENV
+          echo "VERSION=${{ env.GitVersion_MajorMinorPatch }}" > ./version/version.txt
           
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -66,6 +66,12 @@ jobs:
         with:
           name: docker
           path: ./docker/
+
+      - name: Upload version artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: version
+          path: ./version/
         
   docker:
     runs-on: ubuntu-latest
@@ -82,6 +88,15 @@ jobs:
         with:
           name: docker
           path: ./docker/
+
+      - name: Download version artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: version
+          path: ./version/
+
+      - name: Set Version to Env
+        run: echo VERSION=./version/version.txt >> $GITHUB_ENV
         
       - name: Login to Docker Hub
         uses: docker/login-action@v2
