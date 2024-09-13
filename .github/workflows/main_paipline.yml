@@ -125,6 +125,15 @@ jobs:
       DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
 
     steps:
+      - name: Download version artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: version
+          path: ./version/
+
+      - name: Set Version to Env
+        run: echo "VERSION=$(cat ./version/version.txt)" >> $GITHUB_ENV
+      
       - name: Download docker artifacts
         uses: actions/download-artifact@v4
         with:
