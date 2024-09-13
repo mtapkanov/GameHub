@@ -26,9 +26,13 @@ jobs:
         uses: gittools/actions/gitversion/execute@v3.0.0
         
       - name: Output the formatted version
+        id: gitversion
         uses: gittools/actions/gitversion/command@v3.0.0
         with:
           arguments: '/format {MajorMinorPatch}' # any Output Variable can be used here
+          
+      - name: Set VERSION environment variable
+        run: echo "VERSION=${{ steps.gitversion.outputs.version }}" >> $GITHUB_ENV
           
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
