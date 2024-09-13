@@ -15,6 +15,15 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v3.0.0
+        with:
+          versionSpec: '6.x'
+          preferLatestVersion: true
+
+      - name: Determine Version
+        uses: gittools/actions/gitversion/execute@v3.0.0
           
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -34,19 +43,6 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"      
-
-      - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v3.0.0
-        with:
-          versionSpec: '6.x'
-
-      - name: Determine version using GitVersion
-        id: gitversion
-        run: |
-          gitversion /output buildserver /showvariable FullSemVer
-
-      - name: Display GitVersion output
-        run: echo "GitVersion.FullSemVer = ${{ steps.gitversion.outputs.fullsemver }}"
 
       - name: Publish
         run: dotnet publish src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release -r linux-x64 --self-contained true --output ./publish/quiz-master/
