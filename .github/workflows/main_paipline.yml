@@ -30,6 +30,7 @@ jobs:
         
       - name: Set Version to Env
         run: |
+          mkdir -p ./version
           echo "VERSION=${{ env.GitVersion_MajorMinorPatch }}" >> $GITHUB_ENV
           echo "VERSION=${{ env.GitVersion_MajorMinorPatch }}" > ./version/version.txt
           
