@@ -27,6 +27,8 @@ jobs:
         
       - name: Output the formatted version
         uses: gittools/actions/gitversion/command@v3.0.0
+        with:
+          arguments: '/format {MajorMinorPatch}'
         run: echo "VERSION=$GitVersion_MajorMinorPatch" >> $GITHUB_ENV
           
       - name: Setup .NET
