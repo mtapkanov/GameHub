@@ -26,13 +26,8 @@ jobs:
         uses: gittools/actions/gitversion/execute@v3.0.0
         
       - name: Output the formatted version
-        id: gitversion
         uses: gittools/actions/gitversion/command@v3.0.0
-        with:
-          arguments: '/format {MajorMinorPatch}' # any Output Variable can be used here
-          
-      - name: Set VERSION environment variable
-        run: echo "VERSION=${{ steps.gitversion.outputs.version }}" >> $GITHUB_ENV
+        run: echo "VERSION=$GitVersion_MajorMinorPatch" >> $GITHUB_ENV
           
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -43,7 +38,7 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build src/GameHub.QuizMaster/GameHub.QuizMaster.csproj --configuration Release
+        run: dotnet build src/GameHub.QuizMaster/GameHub.QuizMaster.csproj -p:Version=$GitVersion_MajorMinorPatch --configuration Release
 
       - name: Format check
         run: dotnet format --verify-no-changes --verbosity normal
