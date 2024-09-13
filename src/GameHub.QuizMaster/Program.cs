@@ -1,4 +1,5 @@
 ﻿using GameHub.AspNetCore.Extensions.HealthCheck;
+using GameHub.AspNetCore.Extensions.ServiceInfo;
 using GameHub.QuizMaster.Infrastructure.Configuration;
 using GameHub.QuizMaster.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ builder.Services
 var app = builder.Build();
 
 app.MapHealthChecks();
+app.MapServiceInfo();
 
 await app.SeedAppDbContext();
 
