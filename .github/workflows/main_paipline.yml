@@ -31,7 +31,7 @@ jobs:
           arguments: '/format {MajorMinorPatch}'
         
       - name: Set Version to Env
-        run: echo "VERSION=$MajorMinorPatch" >> $GITHUB_ENV
+        run: echo "VERSION=${{ env.GitVersion_MajorMinorPatch }}" >> $GITHUB_ENV
           
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
