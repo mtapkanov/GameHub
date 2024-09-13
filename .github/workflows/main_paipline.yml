@@ -35,10 +35,10 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"      
 
-      - name: Set up GitVersion
-        uses: gittools/actions/gitversion/setup@v0.10.3
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v3.0.0
         with:
-          versionSpec: '5.x'
+          versionSpec: '6.x'
 
       - name: Determine version using GitVersion
         id: gitversion
