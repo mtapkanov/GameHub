@@ -56,6 +56,13 @@ jobs:
       - name: Publish
         run: dotnet publish src/GameHub.QuizMaster/GameHub.QuizMaster.csproj -p:Version=${{ env.VERSION }} --configuration Release -r linux-x64 --self-contained true --output ./publish/quiz-master/
 
+      - name: Set Git Tag
+        run: |
+          git tag ${{ env.VERSION }}
+          git push origin ${{ env.VERSION }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
       - name: Upload project artifact
         uses: actions/upload-artifact@v4
         with:
